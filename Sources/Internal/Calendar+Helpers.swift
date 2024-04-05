@@ -80,6 +80,15 @@ extension Calendar {
       isInGregorianCalendar: identifier == .gregorian)
     return Day(month: month, day: component(.day, from: date))
   }
+    
+    func month2(containing date: Date) -> Month {
+      let month = Month(
+        era: component(.era, from: date),
+        year: component(.year, from: date),
+        month: component(.month, from: date),
+        isInGregorianCalendar: identifier == .gregorian)
+        return Month(era: component(.era, from: date), year: component(.year, from: date), month: component(.month, from: date), isInGregorianCalendar: identifier == .gregorian)
+    }
 
   func startDate(of day: Day) -> Date {
     guard let date = date(from: day.components) else {

@@ -346,6 +346,30 @@ public final class CalendarView: UIView {
       layoutIfNeeded()
     }
   }
+    
+    public func scrollToMonth(
+      toDayContaining dateInTargetDay: Date,
+      scrollPosition: CalendarViewScrollPosition,
+      animated: Bool)
+    {
+      let day = calendar.month2(containing: dateInTargetDay)
+
+
+      // Cancel in-flight scroll
+      scrollView.setContentOffset(scrollView.contentOffset, animated: false)
+
+      scrollToItemContext = ScrollToItemContext(
+        targetItem: .month(day),
+        scrollPosition: scrollPosition,
+        animated: animated)
+
+      if animated {
+        startScrollingTowardTargetItem()
+      } else {
+        setNeedsLayout()
+        layoutIfNeeded()
+      }
+    }
 
   /// Scrolls the calendar to the specified day with the specified position.
   ///
